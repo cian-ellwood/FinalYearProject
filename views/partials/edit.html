@@ -1,0 +1,34 @@
+<div class="modal fade" id="ediModal" ng-controller="TaskController">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="panel panel-info title">
+
+        <div class="panel-heading title">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        
+            <h3 class="panel-title">Edit Task</h3>
+        </div>
+
+        <div class="panel-body">
+          <form ng-submit="editTask(selectedTask)">            
+            <input type="text" ng-model="selectedTask.title" class="form-control" placeholder="Whats wrong with your bike?" required><br>             		      
+            <textarea ng-model="selectedTask.bikebrand" class="form-control" placeholder="What brand is your bike?" required></textarea><br>
+            
+        		<textarea ng-model="selectedTask.bikemodel" class="form-control" placeholder="What model is your bike? (if you don't know leave this field blank)" optional></textarea><br>
+            
+		        <textarea ng-model="selectedTask.description" class="form-control" placeholder="Describe in detail the problem you are experiencing" required></textarea><br>
+        
+        		<textarea ng-model="selectedTask.speciality" class="form-control" placeholder="Do you want any specific parts installed on your bike? (If you don't know just leave the field blank )" optional></textarea><br>
+        
+		      <input type="number" ng-model="selectedTask.total" class="form-control" placeholder="What's your budget?" required><br>
+		      <input type="submit" value="Update Task" class="btn btn-info">
+          </form>
+        </div>
+
+      </div>
+      
+    
+     
+    </div>
+  </div>
+</div>
