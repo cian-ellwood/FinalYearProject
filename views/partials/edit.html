@@ -14,11 +14,11 @@
             <input type="text" ng-model="selectedTask.title" class="form-control" placeholder="Whats wrong with your bike?" required><br>             		      
             <textarea ng-model="selectedTask.bikebrand" class="form-control" placeholder="What brand is your bike?" required></textarea><br>
             
-        		<textarea ng-model="selectedTask.bikemodel" class="form-control" placeholder="What model is your bike? (if you don't know leave this field blank)" optional></textarea><br>
+        		<textarea ng-model="selectedTask.bikemodel" class="form-control" placeholder="(This field is optional)" optional></textarea><br>
             
 		        <textarea ng-model="selectedTask.description" class="form-control" placeholder="Describe in detail the problem you are experiencing" required></textarea><br>
         
-        		<textarea ng-model="selectedTask.speciality" class="form-control" placeholder="Do you want any specific parts installed on your bike? (If you don't know just leave the field blank )" optional></textarea><br>
+        		<textarea ng-model="selectedTask.speciality" class="form-control" placeholder="(This field is optional)" optional></textarea><br>
         
 		      <input type="number" ng-model="selectedTask.total" class="form-control" placeholder="What's your budget?" required><br>
 		      <input type="submit" value="Update Task" class="btn btn-info">
