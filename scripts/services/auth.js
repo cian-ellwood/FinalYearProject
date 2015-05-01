@@ -19,6 +19,10 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
       return profileRef.$set(uid, profile);
     },
 
+    getProfile: function(uid) {
+      return $firebase(ref.child('profile').child(uid)).$asObject();
+    },
+
     login: function(user) {
       return auth.$authWithPassword(
         {email: user.email, password: user.password}
@@ -47,6 +51,10 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
 
     signedIn: function() {
       return !!Auth.user.provider; //using !! means (0, undefined, null, etc) = false | otherwise = true
+    },
+
+    requireAuth: function() {
+      return auth.$requireAuth();
     }
 	};
 

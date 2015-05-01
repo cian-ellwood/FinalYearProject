@@ -132,6 +132,9 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 
 			// Mark that this Task has been assigned
 			// $scope.isAssigned = true;
+
+			// Notify assignee
+			Offer.notifyRunner($scope.selectedTask.$id, runnerId);
 		});
 	};
 

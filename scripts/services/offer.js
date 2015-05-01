@@ -59,9 +59,29 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task) {
 				.then(function() {				
 						
 					// Step 2: Update Task with status = "assigned" and runnerId
-					var t = Task.getTask(taskId);
+					var t = Task.getTask(taskId);			
 					return t.$update({status: "assigned", runner: runnerId});	
+				})
+				.then(function() {					
+
+					// Step 3: Create User-Tasks lookup record for use in Dashboard
+					return Task.createUserTasks(taskId);
 				});
+		},
+
+		notifyRunner: function(taskId, runnerId) {
+			// Get runner's profile
+			Auth.getProfile(runnerId).$loaded().then(function(runner) {
+				var n = {
+					taskId: taskId,
+					email: runner.email,
+					name: runner.name
+				};
+
+				// Create Notification and Zapier will delete it after use.
+				var notification = $firebase(ref.child('notifications')).$asArray();
+				return notification.$add(n);	
+			});
 		}
 
 	};
