@@ -63,12 +63,12 @@
 						
 						<div ng-show="isTaskCreator(selectedTask) && isOpen(selectedTask)">
 							<div class="btn-group">
-							    <a href="" class="btn btn-warning">Admin</a>
+							    <a href="" class="btn btn-warning">Options</a>
 							    <a href="" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
 							    <ul class="dropdown-menu">
-							        <li><a href="" data-toggle="modal" data-target="#ediModal">EDIT TASK</a></li>							        
+							        <li><a href="" data-toggle="modal" data-target="#ediModal">Edit Repair</a></li>							        
 							        <li class="divider"></li>
-							        <li><a href="" ng-click="cancelTask(selectedTask.$id)">CANCEL TASK</a></li>
+							        <li><a href="" ng-click="cancelTask(selectedTask.$id)">Cancel Repair</a></li>
 							    </ul>
 							</div>
 						</div>
@@ -86,6 +86,42 @@
 			</div>
 
 			<br>
+      
+      	<!-- OFFERS -->			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+					    
+					    <div class="panel-heading">
+					        <h3 class="panel-title">Estimates</h3>
+					    </div>
+					    
+					    <div class="panel-body">		
+								
+								<div class="title" ng-hide="offers && offers.length > 0">
+									<span>No estimates have been made yet</span>	
+								</div>	
+
+								<div class="row" ng-repeat="offer in offers">
+									<div class="col-md-10">
+                    
+                    <button ng-show="offer.accepted" class="btn btn-success btn-xs disabled">Assigned</button>
+										
+										<button ng-show="isTaskCreator(selectedTask) && isOpen(selectedTask)" class="btn btn-info btn-xs" ng-click="acceptOffer(offer.$id,offer.uid)">Accept - €{{offer.total}}</button>
+																					
+                    
+										<button ng-show="isOfferMaker(offer) && isOpen(selectedTask)" class="btn btn-danger btn-xs" ng-click="cancelOffer(offer.$id)">Cancel My Estimate - €{{offer.total}}</button>
+
+										<img ng-src="{{offer.gravatar}}" class="img-circle offer gravatar">
+										<span>{{offer.name}}</span>
+									</div>
+								</div><br>
+
+					    </div>
+					</div>			
+				</div>	
+			</div>
+      
 
 			<!-- DESCRIPTION -->
 			<div class="row">
@@ -130,40 +166,6 @@
 				</div>	
 			</div>
       
-      			<!-- OFFERS -->			
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-default">
-					    
-					    <div class="panel-heading">
-					        <h3 class="panel-title">Offers</h3>
-					    </div>
-					    
-					    <div class="panel-body">		
-								
-								<div class="title" ng-hide="offers && offers.length > 0">
-									<span>NO OFFER FOR THIS TASK YET</span>	
-								</div>	
-
-								<div class="row" ng-repeat="offer in offers">
-									<div class="col-md-10">
-                    
-                    <button ng-show="offer.accepted" class="btn btn-success btn-xs disabled">Assigned</button>
-										
-										<button ng-show="isTaskCreator(selectedTask) && isOpen(selectedTask)" class="btn btn-info btn-xs" ng-click="acceptOffer(offer.$id,offer.uid)">Accept - €{{offer.total}}</button>
-																					
-                    
-										<button ng-show="isOfferMaker(offer) && isOpen(selectedTask)" class="btn btn-danger btn-xs" ng-click="cancelOffer(offer.$id)">Cancel My Offer - €{{offer.total}}</button>
-
-										<img ng-src="{{offer.gravatar}}" class="img-circle offer gravatar">
-										<span>{{offer.name}}</span>
-									</div>
-								</div><br>
-
-					    </div>
-					</div>			
-				</div>	
-			</div>
 
 			<!-- COMMENTS -->
 			<div class="row">
