@@ -55,15 +55,15 @@ app.controller('AuthController', function($scope, $location, toaster, Auth) {
      if(err && err.code) {
        switch (err.code) {
          case "EMAIL_TAKEN": 
-           msg = "This email has been taken"; break;          
+           msg = "This email has already been registered"; break;          
         case "INVALID_EMAIL": 
-          msg = "Invalid email"; break;          
+          msg = "This email isn't valid please try another email"; break;          
          case "NETWORK_ERROR": 
-          msg = "Network error"; break;          
+          msg = "There is a network issue please try again"; break;          
          case "INVALID_PASSWORD": 
-           msg = "Invalid password"; break;          
+           msg = "This password is incorrect please try again!"; break;          
          case "INVALID_USER":
-           msg = "Invalid user"; break;                  
+           msg = "This username does not exist have you registered?"; break;                  
        } 
      }   
 
