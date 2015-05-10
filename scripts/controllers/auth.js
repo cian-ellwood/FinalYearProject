@@ -46,6 +46,8 @@ app.controller('AuthController', function($scope, $location, toaster, Auth) {
       });        
   };
 
+     //Utilising the function to extend the error messages in toaster
+  
 	 function errMessage(err) {
 
      var msg = "Unknown Error...";
