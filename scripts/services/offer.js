@@ -52,15 +52,15 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task) {
 
 		//-----------------------------------------------//
 
-		acceptOffer: function(taskId, offerId, runnerId) {
+		acceptOffer: function(taskId, offerId, mechanicId) {
 			// Step 1: Update Offer with accepted = true
 			var o = this.getOffer(taskId, offerId);
 			return o.$update({accepted: true})
 				.then(function() {				
 						
-					// Step 2: Update Task with status = "assigned" and runnerId
+					// Step 2: Update Task with status = "assigned" and mechanicId
 					var t = Task.getTask(taskId);			
-					return t.$update({status: "assigned", runner: runnerId});	
+					return t.$update({status: "assigned", mechanic: mechanicId});	
 				})
 				.then(function() {					
 
@@ -69,17 +69,17 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task) {
 				});
 		},
 
-		notifyRunner: function(taskId, runnerId) {
-			// Get runner's profile
-			Auth.getProfile(runnerId).$loaded().then(function(runner) {
+		notifyMechanic: function(taskId, mechanicId) {
+			// Get mechanic's profile
+			Auth.getProfile(mechanicId).$loaded().then(function(mechanic) {
 				var n = {
 					taskId: taskId,
-					email: runner.email,
-					name: runner.name
+					email: mechanic.email,
+					name: mechanic.name
 				};
 
 				// Create Notification and Zapier will delete it after use.
-				var notification = $firebase(ref.child('notifications')).$asArray();
+				var notification = $firebase(ref.child('notification')).$asArray();
 				return notification.$add(n);	
 			});
 		}
