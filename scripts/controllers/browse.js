@@ -4,7 +4,9 @@ app.controller('BrowseController', function ($scope, $routeParams, toaster, Task
 
     $scope.searchTask = '';
     $scope.tasks = Task.all;
-
+    
+  //check if user is signedin
+  
     $scope.user = Auth.user;
     $scope.signedIn = Auth.signedIn;
 
@@ -19,46 +21,42 @@ app.controller('BrowseController', function ($scope, $routeParams, toaster, Task
     function setSelectedTask(task) {
         $scope.selectedTask = task;
 
-        // We check isTaskCreator only if user signedIn 
-        // so we don't have to check every time normal guests open the task
         if ($scope.signedIn()) {
 
-            // Check if the current login user has already made an offer for selected task
+            // Verify if the user has already made an offer on this task
             Offer.isOfferred(task.$id).then(function (data) {
                 $scope.alreadyOffered = data;
             });
 
-            // Check if the current login user is the creator of selected task
+            // Check if current user has created the task they have selected
             $scope.isTaskCreator = Task.isCreator;
 
-            // Check if the selectedTask is open
+            // Verifies if this selected task is opened
             $scope.isOpen = Task.isOpen;
 
-            // Unblock the Offer button on Offer modal
-            // $scope.offer = {close: ''};	
+            // Show the estimate button on the modal
             $scope.block = false;
 
-            // Check if the current login user is offer maker (to display Cancel Offer button)
+            // Display cancel estimate button if the user is the person who has made the estimate
             $scope.isOfferMaker = Offer.isMaker;
 
-            // --------------------------------------------//
 
-            // Check if the current user is assigned fot the selected task
+            //Verifies the current user is the tasks assignee
             $scope.isAssignee = Task.isAssignee;
 
-            // Check if the selectedTask is completed
+            // Checks to see if the current task is completed
             $scope.isCompleted = Task.isCompleted;
 
         }
 
-        // Get list of comments for the selected task
+        // Get comments for the current task
         $scope.comments = Comment.comments(task.$id);
 
-        // Get list of offers for the selected task
+        // Get offer list for the task that is selected
         $scope.offers = Offer.offers(task.$id);
     };
 
-    // --------------- TASK ---------------	
+
 
     $scope.cancelTask = function (taskId) {
         Task.cancelTask(taskId).then(function () {
@@ -66,7 +64,7 @@ app.controller('BrowseController', function ($scope, $routeParams, toaster, Task
         });
     };
 
-    // --------------------------------------------//
+
 
     $scope.completeTask = function (taskId) {
         Task.completeTask(taskId).then(function () {
@@ -74,7 +72,6 @@ app.controller('BrowseController', function ($scope, $routeParams, toaster, Task
         });
     };
 
-    // --------------- COMMENT ---------------	
 
     $scope.addComment = function () {
         var comment = {
@@ -88,7 +85,7 @@ app.controller('BrowseController', function ($scope, $routeParams, toaster, Task
         });
     };
 
-    // --------------- OFFER ---------------
+
 
     $scope.makeOffer = function () {
         var offer = {
@@ -101,13 +98,13 @@ app.controller('BrowseController', function ($scope, $routeParams, toaster, Task
         Offer.makeOffer($scope.selectedTask.$id, offer).then(function () {
             toaster.pop('success', "Your estimate has been placed.");
 
-            // Mark that the current user has offerred for this task.
+            // Show the user has already made an offer on the task
             $scope.alreadyOffered = true;
 
-            // Reset offer form
+            // Reset estimate form
             $scope.total = '';
 
-            // Disable the "Offer Now" button on the modal
+            // Hide the estimate button when user has made an offer
             $scope.block = true;
         });
     };
@@ -116,22 +113,21 @@ app.controller('BrowseController', function ($scope, $routeParams, toaster, Task
         Offer.cancelOffer($scope.selectedTask.$id, offerId).then(function () {
             toaster.pop('success', "Your estimate has been cancelled.");
 
-            // Mark that the current user has cancelled offer for this task.
+            // Mark the user has cancelled the offer
             $scope.alreadyOffered = false;
 
-            // Unblock the Offer button on Offer modal
+            // When user cancels show the offer button again
             $scope.block = false;
         });
     };
 
-    // --------------------------------------------//
+
 
     $scope.acceptOffer = function(offerId, mechanicId) {
         Offer.acceptOffer($scope.selectedTask.$id, offerId, mechanicId).then(function() {
             toaster.pop('success', "Estimate is accepted successfully!");
 
-            // Mark that this Task has been assigned
-            // $scope.isAssigned = true;
+
 
             // Notify assignee
             Offer.notifyMechanic($scope.selectedTask.$id, mechanicId);

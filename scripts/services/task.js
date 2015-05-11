@@ -16,7 +16,7 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 			task.datetime = Firebase.ServerValue.TIMESTAMP;
 			return tasks.$add(task).then(function(newTask) {
 				
-				// Create User-Tasks lookup record for POSTER
+				// Create User tasks for repair poster
 				var obj = {
 					taskId: newTask.key(),
 					type: true,

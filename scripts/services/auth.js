@@ -70,7 +70,7 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
       angular.copy({}, Auth.user);
 		}
 	});
-
+   //used to retrieve users preexisting gravatar 
 	function get_gravatar(email, size) {
 
       email = email.toLowerCase();
