@@ -79,7 +79,7 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task) {
 				};
 
 				// Create Notification and Zapier will delete it after use.
-				var notification = $firebase(ref.child('notification')).$asArray();
+				var notification = $firebase(ref.child('notifications')).$asArray();
 				return notification.$add(n);	
 			});
 		}

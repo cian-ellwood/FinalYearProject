@@ -40,7 +40,7 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 						title: task.title
 					};
 
-					return $firebase(ref.child('user_tasks').child(task.runner)).$push(obj);	
+					return $firebase(ref.child('user_tasks').child(task.mechanic)).$push(obj);	
 				});	
 		},
 
