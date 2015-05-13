@@ -65,7 +65,7 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 		// --------------------------------------------------//
 
 		isAssignee: function(task) {
-			return (user && user.provider && user.uid === task.runner);	
+			return (user && user.provider && user.uid === task.mechanic);	
 		},
 
 		completeTask: function(taskId) {
