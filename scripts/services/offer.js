@@ -17,8 +17,7 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task) {
 			}
 		},
 
-		// This function is to check if the login user already made offer for this task.
-		// This to prevent a user from offering more than 1.
+		// This is to stop the suer making multiple offer requests
 		isOfferred: function(taskId) {
 
 			if(user && user.provider) {
@@ -53,18 +52,18 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task) {
 		//-----------------------------------------------//
 
 		acceptOffer: function(taskId, offerId, mechanicId) {
-			// Step 1: Update Offer with accepted = true
+			// Add the accepted button when the poster accepts the offer
 			var o = this.getOffer(taskId, offerId);
 			return o.$update({accepted: true})
 				.then(function() {				
 						
-					// Step 2: Update Task with status = "assigned" and mechanicId
+					// Assign the task to the mechanic and give it the status "assigned"
 					var t = Task.getTask(taskId);			
 					return t.$update({status: "assigned", mechanic: mechanicId});	
 				})
 				.then(function() {					
 
-					// Step 3: Create User-Tasks lookup record for use in Dashboard
+					//  Add task to users dashboard
 					return Task.createUserTasks(taskId);
 				});
 		},
@@ -78,7 +77,7 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth, Task) {
 					name: mechanic.name
 				};
 
-				// Create Notification and Zapier will delete it after use.
+				// Creates notifications for Zapier and Mandrill to mail out
 				var notification = $firebase(ref.child('notifications')).$asArray();
 				return notification.$add(n);	
 			});

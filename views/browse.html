@@ -1,10 +1,10 @@
 <div class="row">
 	
-	<!-- LEFT PANEL -->
+	
 	<div class="col-md-offset-1 col-md-4">
 
 		<div class="list-group">
-				<!-- SEARCH TOOL -->
+				<!-- Search Function -->
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
@@ -14,7 +14,7 @@
 			    </div>	
 				</div>
 				
-				<!-- TASK LIST -->	
+				<!-- List out the created tasks -->	
 				<a ng-repeat="task in tasks | filter: {title: searchTask , status: '!cancelled'} | orderBy: 'datetime':true" ng-href="#/browse/{{task.$id}}">
 					<div class="list-group-item">
 				        <div class="row-picture">
@@ -37,7 +37,7 @@
 
 	</div>
 
-	<!-- RIGHT PANEL -->
+	<!-- Displays image when task isnt displayed -->
 	<div class="col-md-6">
 		<div ng-show="listMode">
 			<img src="images/broken.jpg" class="img-responsive img-browse">
@@ -45,7 +45,7 @@
 		
 		<div ng-show="!listMode">
 			
-			<!-- HEADER -->
+			<!-- Tasks header -->
 			<div class="row">
 				<div class="col-md-8">
 					<h3>{{ selectedTask.title }}</h3>
@@ -87,7 +87,7 @@
 
 			<br>
       
-      	<!-- OFFERS -->			
+      	<!-- Displaying offers -->			
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
@@ -123,7 +123,7 @@
 			</div>
       
 
-			<!-- DESCRIPTION -->
+			<!-- Displays task descriptions in seperate panels -->
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
@@ -167,7 +167,7 @@
 			</div>
       
 
-			<!-- COMMENTS -->
+			<!-- Adds comment function -->
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">

@@ -33,7 +33,7 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 				.$loaded()
 				.then(function(task) {
 					
-					// Create User-Tasks lookup record for RUNNER
+					// Create tasks for mechanic
 					var obj = {
 						taskId: taskId,
 						type: false,
@@ -62,7 +62,6 @@ app.factory('Task', function(FURL, $firebase, Auth) {
 			return task.status === "open";
 		},
 
-		// --------------------------------------------------//
 
 		isAssignee: function(task) {
 			return (user && user.provider && user.uid === task.mechanic);	
