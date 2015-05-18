@@ -196,7 +196,7 @@
 									</div>									
 								</div><br>
 
-								<div class="row" ng-show="isOpen(selectedTask) && isCompleted(selectedTask)">
+								<div class="row" ng-show="isOpen(selectedTask)">
 									<div class="col-md-12">
 										<form ng-submit="addComment()">	
 
@@ -204,7 +204,7 @@
 												<div class="input-group-addon">
 													<img ng-src="{{ user.profile.gravatar }}" class="img-circle comment gravatar">
 												</div>
-									      <input type="text" ng-model="content" cols="10" rows="3" class="form-control" placeholder="Comment here..." required><br>
+									      <input type="text" ng-model="content" cols="10" rows="3" class="form-control" placeholder="Write comments here" required><br>
 									    </div>
 
 											<span class="pull-right">
