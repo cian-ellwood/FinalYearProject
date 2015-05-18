@@ -18,11 +18,11 @@
 			<div class="col-md-6">
 				<div class="panel panel-success">
 				    <div class="panel-heading">
-				        <h3 class="panel-title">Repairs Assigned to You <span class="badge">{{numRunner}}</span></h3>
+				        <h3 class="panel-title">Repairs Assigned to You <span class="badge">{{numMechanic}}</span></h3>
 				    </div>
 				    <div class="panel-body">
-				    	<div ng-if="numRunner === 0"> You don't have any repairs assigned to you yet</div>		    	
-			        <div ng-repeat="task in taskRunner">
+				    	<div ng-if="numMechanic === 0"> You don't have any repairs assigned to you yet</div>		    	
+			        <div ng-repeat="task in taskMechanic">
 			        	<a ng-href="#/browse/{{task.taskId}}"> {{task.title}} </a>
 			        </div>
 				    </div>
